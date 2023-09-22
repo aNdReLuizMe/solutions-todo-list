@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TaskGroup>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
  */
-class TaskGroupFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,10 @@ class TaskGroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(1),
+            'title' => fake()->sentence(3),
             'description' => fake()->text(),
+            'user_id' => fake()->numberBetween(1, 50),
+            'task_group_id' => fake()->numberBetween(1, 5),
         ];
     }
 }
