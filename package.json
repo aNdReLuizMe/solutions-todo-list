@@ -7,7 +7,22 @@
     },
     "devDependencies": {
         "axios": "^1.1.2",
+        "git-cz": "^4.9.0",
         "laravel-vite-plugin": "^0.8.0",
         "vite": "^4.0.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/git-cz"
+        }
+    },
+    "dependencies": {
+        "@jridgewell/sourcemap-codec": "^1.4.15",
+        "chokidar": "^3.5.3",
+        "formidable": "^3.5.1",
+        "graphql-postgres-subscriptions": "^1.0.5",
+        "graphql-ws": "^5.14.0",
+        "source-map-resolve": "^0.6.0",
+        "uuid": "^9.0.1"
     }
 }
