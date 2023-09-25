@@ -22,20 +22,29 @@ class TaskResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('task_group_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
+                Forms\Components\Grid::make()->schema([
+                    Forms\Components\Select::make('user_id')
+                        ->relationship('user', 'name')
+                        ->searchable()
+                        ->required(),
+                    Forms\Components\Select::make('task_group_id')
+                        ->relationship('taskGroup', 'title')
+                        ->required(),
+                    Forms\Components\TextInput::make('title')
+                        ->required()
+                        ->maxLength(255)
+                        ->columnSpan(2),
+                    Forms\Components\Textarea::make('description')
+                        ->maxLength(65535)
+                        ->columnSpan(2),
+                ])
+                    ->columns(2),
             ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -60,10 +69,10 @@ class TaskResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('user')
-                    ->searchable()
-                    ->relationship('user', 'name')
+                    ->relationship('user', 'name'),
+                SelectFilter::make('taskGroup')
+                    ->relationship('taskGroup', 'title')
             ])
-
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
